@@ -1,0 +1,31 @@
+/*Carrot logo in the navbar*/
+#carrot-img{
+    height : 35px;
+    margin-top : 0px;
+    width : 35px;
+}
+
+/*Pur beurre logo in the navbar */
+#logo-pur-beurre{
+    height : 50px;
+    margin-right : 10px;
+    width : 50px;
+}
+
+/*Remy image in the section*/
+#remy-img{
+    height : 300px;
+    width : 400px;
+}
+
+/*Search input in the first section to substitute a product */
+#search-input{
+    height : 40px;
+    width : 40%;
+}
+
+/*Button to launch the search for a substitution product */
+#btn-search-input{
+    height : 40px;
+    margin-left : 10px;
+}
