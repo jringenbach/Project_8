@@ -1,8 +1,30 @@
-<html>
-    <head>
-    
-    </head>
-    <body>
-        
-    </body>
-</html>
+{% extends "openfoodfacts/index.html" %}
+{% load static %}
+
+{% block css %}
+  <!-- Personal theme-->
+  <link href="{% static 'openfoodfacts/css/connexion.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<div class="row h-100 justify-content-center" id="connexion-form">
+    <!-- Connexion form -->
+    <form class="col-6 h-25 justify-content-center align-self-center text-center">
+        <h2 class="text-white-75 font-weight-light mb-5">Connexion</h2>
+
+        <div class="row justify-content-center">
+            <input class="col-4 input-connexion" type="text" placeholder="Adresse e-mail"/>
+        </div>
+
+        <div class="row justify-content-center">
+            <input class="col-4 input-connexion" type="password" placeholder="Mot de passe" />
+        </div>
+
+        <input class="row btn btn-primary input-connexion col-3" type="button" value="Connexion" />
+    </form>
+</div>
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}
