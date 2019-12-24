@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
 
 # Create your models here.
 class Store(models.Model):
@@ -79,3 +82,13 @@ class ProductStore(models.Model):
 
     barcode = models.ForeignKey(Product, on_delete=models.CASCADE)
     id_store = models.ForeignKey(Store, on_delete=models.CASCADE)
+
+
+
+class UserProduct(models.Model):
+    """Intermediate table that represents the many-to-many relationship between an user a product
+    email : email of a User (string)
+    barcode : barcode of a product (string)"""
+
+    email = models.ForeignKey(User, on_delete=models.CASCADE)
+    barcode = models.ForeignKey(Product, on_delete=models.CASCADE)
