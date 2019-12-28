@@ -3,23 +3,11 @@ from django.contrib.auth.models import User
 
 
 
-# Create your models here.
-#Stores non obligatoires : à enlever
-class Store(models.Model):
-    """Class that represents the store in the database
-    id_store : unique identifier of a store (int)
-    name_store : name of a store (string)"""
-    id_store = models.IntegerField(primary_key=True)
-    name_store = models.CharField(max_length=30)
-
-
-
 class Categorie(models.Model):
     """Class that represents the store in the database
     id_categorie : unique identifier of a categorie (int)
     name_categorie : name of a categorie (string)"""
 
-    id_categorie = models.IntegerField(primary_key=True)
     name_categorie = models.CharField(max_length=50)
 
 
@@ -29,7 +17,6 @@ class Brand(models.Model):
     id_brand : unique identifier of a brand (int)
     name_brand : name of a brand (string)"""
 
-    id_brand = models.IntegerField(primary_key=True)
     name_brand = models.CharField(max_length=80)
 
 
@@ -53,6 +40,8 @@ class Product(models.Model):
     barcode = models.CharField(max_length=20, primary_key=True)
     product_name = models.CharField(max_length=100)
     url = models.CharField(max_length=150)
+    image_url = models.CharField(max_length=150)
+    image_small_url = models.CharField(max_length=150)
     nutrition_grade = models.ForeignKey(Nutritiongrade, on_delete=models.CASCADE)
 
 
@@ -62,8 +51,8 @@ class ProductBrand(models.Model):
     barcode : barcode of a product (string)
     id_brand : unique identifier of a brand (int)"""
 
-    barcode = models.ForeignKey(Product, on_delete=models.CASCADE)
-    id_brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_brand")
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="product_brand")
 
 
 
@@ -72,18 +61,8 @@ class ProductCategorie(models.Model):
     barcode : barcode of a product (string)
     id_categorie : unique identifier of a categorie (int)"""
 
-    barcode = models.ForeignKey(Product, on_delete=models.CASCADE)
-    id_categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
-
-
-
-class ProductStore(models.Model):
-    """Intermediate table that represents the many-to-many relationship between a product and a store
-    barcode : barcode of a product (string)
-    id_store : unique identifier of a store (int)"""
-
-    barcode = models.ForeignKey(Product, on_delete=models.CASCADE)
-    id_store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_categorie")
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, related_name="product_categorie")
 
 
 
@@ -92,6 +71,5 @@ class UserProduct(models.Model):
     email : email of a User (string)
     barcode : barcode of a product (string)"""
 
-    #user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_products")
-    email = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_products")
-    barcode = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_products")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_products")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_products")

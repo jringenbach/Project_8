@@ -7,10 +7,12 @@ import re
 class ConnexionForm(forms.ModelForm):
     """Form that we use to help user to connect to the website"""
 
+
     class Meta:
         model = User
         fields = ["email","password"]
         exclude = ("username", "groups", "user_permissions", "is_staff", "is_active", "is_superuser", "last_login", "date_joined", "first_name", "last_name")
+
 
 
 class CreateAccountForm(forms.ModelForm):
@@ -70,18 +72,5 @@ class CreateAccountForm(forms.ModelForm):
             raise forms.ValidationError("Cette adresse e-mail est déjà utilisée!")
 
         return email
-
-
-
-    def clean_password(self):
-        """Method to set some rules for the password"""
-
-        password = self.cleaned_data["password"]
-
-        #If the password length is inferior to 
-        if len(password) < 8:
-            raise forms.ValidationError("Le mot de passe doit contenir au moins 8 caractères.")
-
-        return password
 
     
