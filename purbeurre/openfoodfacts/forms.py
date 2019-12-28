@@ -4,7 +4,16 @@ import re
 
 
 
-class UserForm(forms.ModelForm):
+class ConnexionForm(forms.ModelForm):
+    """Form that we use to help user to connect to the website"""
+
+    class Meta:
+        model = User
+        fields = ["email","password"]
+        exclude = ("username", "groups", "user_permissions", "is_staff", "is_active", "is_superuser", "last_login", "date_joined", "first_name", "last_name")
+
+
+class CreateAccountForm(forms.ModelForm):
     """Form that we use for users to create their account"""
 
     password = forms.CharField(widget=forms.PasswordInput())

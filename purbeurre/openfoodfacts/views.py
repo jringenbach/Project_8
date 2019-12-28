@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import UserForm
+from django.contrib.auth.models import User
+from .forms import CreateAccountForm, ConnexionForm
 
 
 
@@ -14,21 +15,25 @@ def index(request):
 
 def connexion(request):
     """Connexion page where user can log in"""
+    form = ConnexionForm(request.POST or None)
 
-    return render(request, "openfoodfacts/connexion.html")
+    if form.is_valid():
+        pass
+
+    return render(request, "openfoodfacts/connexion.html", locals())
 
 
 
 def create_account(request):
     """Page where users can create their account"""
 
-    form = UserForm(request.POST or None)
+    form = CreateAccountForm(request.POST or None)
 
     if form.is_valid():
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
         email = form.cleaned_data["email"]
-        form.save()
+        User.objects.create_user(username=username, password=password, email=email)
 
         envoi = True
 

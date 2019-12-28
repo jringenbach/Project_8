@@ -1,9 +1,10 @@
 {% extends "openfoodfacts/index.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block css %}
   <!-- Personal theme-->
-  <link href="{% static 'openfoodfacts/css/connexion.css' %}" rel="stylesheet">
+  <link href="{% static 'openfoodfacts/css/form.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block header %}
@@ -12,12 +13,18 @@
     <form class="col-6 h-25 justify-content-center align-self-center text-center">
         <h2 class="text-white-75 font-weight-light mb-5">Connexion</h2>
 
-        <div class="row justify-content-center">
-            <input class="col-4 input-connexion" type="text" placeholder="Adresse e-mail"/>
+        <!--Username/email field-->
+        <div class="form-row justify-content-center">
+            <div class="col-5">
+              {{ form.email|as_crispy_field }}
+            </div>
         </div>
 
-        <div class="row justify-content-center">
-            <input class="col-4 input-connexion" type="password" placeholder="Mot de passe" />
+        <!--Password field-->
+        <div class="form-row justify-content-center">
+            <div class="col-5">
+              {{ form.password|as_crispy_field }}
+            </div>
         </div>
 
         <input class="row btn btn-primary input-connexion col-3" type="button" value="Connexion" />

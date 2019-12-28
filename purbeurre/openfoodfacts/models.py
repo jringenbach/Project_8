@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+#Stores non obligatoires : à enlever
 class Store(models.Model):
     """Class that represents the store in the database
     id_store : unique identifier of a store (int)
@@ -40,7 +41,8 @@ class Nutritiongrade(models.Model):
     nutrition_grade = models.CharField(max_length=1, primary_key=True)
 
 
-
+#ajouter l'url de l'image
+#ajouter l'url de l'image de l'étiquette nutritionnelle
 class Product(models.Model):
     """A product that we got from openfoodfacts API
     barcode : barcode of the product (string)
@@ -90,5 +92,6 @@ class UserProduct(models.Model):
     email : email of a User (string)
     barcode : barcode of a product (string)"""
 
-    email = models.ForeignKey(User, on_delete=models.CASCADE)
-    barcode = models.ForeignKey(Product, on_delete=models.CASCADE)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_products")
+    email = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_products")
+    barcode = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_products")
