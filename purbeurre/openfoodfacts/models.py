@@ -3,6 +3,15 @@ from django.contrib.auth.models import User
 
 
 
+class Nutritiongrade(models.Model):
+    """Class that represents the nutrition grade of a product
+    nutrition_grade : nutriscore represented by a character from A to F (string)"""
+
+    nutrition_grade = models.CharField(max_length=1, primary_key=True)
+
+
+
+
 class Categorie(models.Model):
     """Class that represents the store in the database
     id_categorie : unique identifier of a categorie (int)
@@ -20,16 +29,7 @@ class Brand(models.Model):
     name_brand = models.CharField(max_length=80)
 
 
-
-class Nutritiongrade(models.Model):
-    """Class that represents the nutrition grade of a product
-    nutrition_grade : nutriscore represented by a character from A to F (string)"""
-
-    nutrition_grade = models.CharField(max_length=1, primary_key=True)
-
-
-#ajouter l'url de l'image
-#ajouter l'url de l'image de l'étiquette nutritionnelle
+    
 class Product(models.Model):
     """A product that we got from openfoodfacts API
     barcode : barcode of the product (string)
@@ -43,6 +43,8 @@ class Product(models.Model):
     image_url = models.CharField(max_length=150)
     image_small_url = models.CharField(max_length=150)
     nutrition_grade = models.ForeignKey(Nutritiongrade, on_delete=models.CASCADE)
+    categories = models.ManyToManyField(Categorie, through="ProductCategorie")
+    brands = models.ManyToManyField(Brand, through="ProductBrand")
 
 
 
