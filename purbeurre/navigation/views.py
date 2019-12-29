@@ -61,3 +61,10 @@ def create_account(request):
         envoi = True
 
     return render(request, "navigation/create_account.html", locals())
+
+
+
+def profile(request):
+    """Profile page of the user"""
+
+    return render(request, "navigation/profile.html", locals())

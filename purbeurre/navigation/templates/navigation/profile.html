@@ -1,0 +1,24 @@
+{% extends "navigation/index.html" %}
+{% load static %}
+
+{% block css %}
+  <!-- Personal theme-->
+  <link href="{% static 'navigation/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<div class="container" id="info-user">
+    <div class="row justify-content-center">
+        <h2 class="text-white-75 font-weight-light mb-5">Profil utilisateur</h2>
+    </div>
+    <div class="row justify-content-left">
+        <p class="text-white-75">A boy</p>
+    </div>
+    <div class="row justify-content-left">
+        <p class="text-white-75">Nom d'utilisateur : {{user.username}}</p>
+    </div>
+    <div class="row justify-content-left">
+        <p class="text-white-75">Email : {{user.email}}</p>
+    </div>
+</div>
+{% endblock %}
