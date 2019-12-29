@@ -28,6 +28,7 @@ def connexion(request):
 
             if user:
                 login(request, user)
+                return(redirect(index))
             else:
                 error = True
     
@@ -42,7 +43,7 @@ def connexion(request):
 def deconnexion(request):
     """Action when user wants to log out of the website"""
     logout(request)
-    return redirect(reverse(connexion))
+    return redirect(index)
 
 
 

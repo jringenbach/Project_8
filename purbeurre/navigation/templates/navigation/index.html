@@ -62,6 +62,10 @@
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="deconnexion"><img class="icon" src="{% static 'navigation/img/logout-icon.png'%}"></a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="connexion"><img class="icon" src="{% static 'navigation/img/login-icon.png'%}"></a>
+            </li>
             {% endif %}
           </ul>
         </div>
@@ -81,9 +85,9 @@
         </div>
         <div class="col-lg-8 align-self-baseline">
           <h2 class="text-white-75 font-weight-light mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours!</h2>
-          <form>
+          <form method="post">
               <input id="search-input" type="text" placeholder="Substituer un produit"/>
-              <input id="btn-search-input" class="btn btn-primary" type="button" value="Rechercher"/>
+              <input id="btn-search-input" class="btn btn-primary" type="submit" value="Rechercher"/>
             </form>
         </div>
       </div>
