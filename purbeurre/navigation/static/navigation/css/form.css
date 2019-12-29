@@ -8,3 +8,12 @@ label{
     font-size : 15px;
 }
 
+#connexion-failed{
+    color : red;
+}
+
+#connexion-failed-row{
+    height : 30px;
+    margin-bottom : 10px;
+    width : auto;
+}

@@ -4,14 +4,22 @@ import re
 
 
 
-class ConnexionForm(forms.ModelForm):
+class ConnexionForm(forms.Form):
     """Form that we use to help user to connect to the website"""
 
+    username = forms.CharField(label="Nom d'utilisateur")
+    password = forms.CharField(widget=forms.PasswordInput())
 
-    class Meta:
-        model = User
-        fields = ["email","password"]
-        exclude = ("username", "groups", "user_permissions", "is_staff", "is_active", "is_superuser", "last_login", "date_joined", "first_name", "last_name")
+    def __init__(self, *args):
+        super().__init__(*args)
+
+        #We add the class create_input to our fields
+        self.fields['username'].widget.attrs.update({"class" : "create_input"})
+        self.fields['password'].widget.attrs.update({"class" : "create_input"})
+
+        #We change the label of the fields
+        self.fields["username"].label = "Nom d'utilisateur"
+        self.fields["password"].label = "Mot de passe"
 
 
 
