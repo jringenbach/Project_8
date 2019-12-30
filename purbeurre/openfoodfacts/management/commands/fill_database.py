@@ -19,7 +19,7 @@ class Command(BaseCommand):
             "tagtype_0" : "categories",
             "tag_contains_0" : "contains",
             "tag_0" : "",
-            "page_size" : "500"
+            "page_size" : "200"
         }
 
         try:
@@ -33,7 +33,8 @@ class Command(BaseCommand):
                 categorie, categorie_created = Categorie.objects.get_or_create(name_categorie=name_categorie)
                 
                 #We get datas for each product
-                for product_json in products_json["products"]:
+                for i, product_json in enumerate(products_json["products"]):
+                    print(str(i)+". "+product_json["product_name"])
                     if "product_name" in product_json.keys() and "nutrition_grades" in product_json.keys() \
                     and "brands" in product_json.keys() and "code" in product_json.keys() and "image_small_url" in product_json.keys() \
                     and "image_url" in product_json.keys() and "url" in product_json.keys():
@@ -45,17 +46,22 @@ class Command(BaseCommand):
                         url = product_json["url"]
                         product_name = product_json["product_name"]
 
-                        #If the brand doesn't already exist
-                        brand, brand_created = Brand.objects.get_or_create(name_brand=name_brand)
+                        name_brand = name_brand.split(",")
+                        list_brand = list()
+                        for br in name_brand:
+                            #If the brand doesn't already exist
+                            brand, brand_created = Brand.objects.get_or_create(name_brand=br)
+                            list_brand.append(brand)
 
                         #If the Nutritiongrade doesn't already exist
                         nutrition_grade, nutrition_grade_created = Nutritiongrade.objects.get_or_create(nutrition_grade=nutritiongrade)
 
                         #If the product doesn't already exist
                         product, product_created = Product.objects.get_or_create(barcode=barcode, url=url, product_name=product_name, image_url = image_url, \
-                             image_small_url=image_small_url, nutrition_grade=nutrition_grade)
+                            image_small_url=image_small_url, nutrition_grade=nutrition_grade)
 
-                        product.brands.add(brand)
+                        for br in list_brand:
+                            product.brands.add(br)
                         product.categories.add(categorie)
 
 

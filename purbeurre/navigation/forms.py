@@ -1,6 +1,17 @@
 from django.contrib.auth.models import User
 from django import forms
+from openfoodfacts.models import Product
 import re
+
+
+class ProductForm(forms.ModelForm):
+
+    product_name = forms.CharField(label="product_name")
+
+    class Meta:
+        model = Product
+        fields = ["product_name"]
+        exclude = ("barcode", "url", "image_small_url", "nutrition_grade", "categories", "brands")
 
 
 

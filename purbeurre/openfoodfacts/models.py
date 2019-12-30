@@ -29,7 +29,7 @@ class Brand(models.Model):
     name_brand = models.CharField(max_length=80)
 
 
-    
+
 class Product(models.Model):
     """A product that we got from openfoodfacts API
     barcode : barcode of the product (string)
@@ -38,10 +38,10 @@ class Product(models.Model):
     nutrition_grade : Nutriscore of the product (Nutritiongrade)"""
 
     barcode = models.CharField(max_length=20, primary_key=True)
-    product_name = models.CharField(max_length=100)
-    url = models.CharField(max_length=150)
-    image_url = models.CharField(max_length=150)
-    image_small_url = models.CharField(max_length=150)
+    product_name = models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
+    image_url = models.CharField(max_length=200)
+    image_small_url = models.CharField(max_length=200)
     nutrition_grade = models.ForeignKey(Nutritiongrade, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Categorie, through="ProductCategorie")
     brands = models.ManyToManyField(Brand, through="ProductBrand")

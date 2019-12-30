@@ -3,11 +3,32 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from .forms import CreateAccountForm, ConnexionForm
+from openfoodfacts.models import Product, Brand, Nutritiongrade
+from .forms import CreateAccountForm, ConnexionForm, ProductForm
 
 
 
-# Create your views here.
+def aliment(request):
+    """Page where user can see the result of its search for an aliment or see the previous searches"""
+
+    if request.method == "POST":
+        productform = ProductForm(request.POST)
+        if productform.is_valid():
+            #We get the product asked by user in the database
+            product_name = productform.cleaned_data["product_name"]
+            product = Product.objects.filter(product_name__contains=product_name).order_by('nutrition_grade')
+
+            #We get the first categorie in which belong this product
+            product_categorie = product.categories.all()[0]
+            categorie_search = Categorie.objects.filter(name_categorie=product_categorie)
+
+            #We look for every product with the same categorie
+            productcategorie_from_this_categorie = categorie_search.product_categorie.all()
+
+    return render(request, "navigation/aliment.html", locals())
+
+
+
 def index(request):
     """Index page of the website purbeurre"""
 

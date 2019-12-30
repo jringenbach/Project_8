@@ -55,7 +55,7 @@
               <a class="nav-link js-scroll-trigger" href="profile"><img class="icon" src="{% static 'navigation/img/account-icon.png'%}"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#services"><img class="icon" src="{% static 'navigation/img/carrot-icon.png'%}"></a>
+              <a class="nav-link js-scroll-trigger" href="aliment"><img class="icon" src="{% static 'navigation/img/carrot-icon.png'%}"></a>
             </li>
 
             {% if user.is_authenticated %}
@@ -85,8 +85,9 @@
         </div>
         <div class="col-lg-8 align-self-baseline">
           <h2 class="text-white-75 font-weight-light mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours!</h2>
-          <form method="post">
-              <input id="search-input" type="text" placeholder="Substituer un produit"/>
+          <form method="post" action="aliment">
+              {% csrf_token %}
+              <input id="product_name" type="text" placeholder="Substituer un produit"/>
               <input id="btn-search-input" class="btn btn-primary" type="submit" value="Rechercher"/>
             </form>
         </div>
